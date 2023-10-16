@@ -1,2 +1,86 @@
 # Taotie
 A tool that integrates a variety of LLM api.
+
+# interface usage guide
+### 1. dependency installation
+At first we need to install the dependencies.
+```bash
+pip install -r requirements.txt
+```
+### init agent object
+You can init an agent object by using the following code.
+```python
+from agent_use import ChatAgent
+my_agent = ChatAgent()
+```
+When class ChatAgent is initialized, it will take the value of `llm_name` in file `config.json` as the default LLM api.  
+If you want to use other LLM api, you can set the `llm_name` in file `config.json` to the name of the LLM api you want to use, or you can just set `llm_name` variable like this:
+```python
+from agent_use import ChatAgent
+my_agent = ChatAgent(llm_name='chatglm2-6b')
+```
+Make sure that the the LLM api you want to use is in `support_llm` of `config.json`.
+
+### chat with you agent
+After init the agent object, you can chat with your agent by using the following code.
+```python
+my_agent.prompt_add('Hello')
+response = my_agent.prompt_post(0.1, 200, False)
+```
+prompt_post needs 3 parameters: 
+
+| Parameter | defaut value | Description |
+| --------- |-----------| ----------- |
+|T| 0.1 |Model sampling temperature, most LLM api will use this parameter to control the model sampling probability.|
+|maxtokens| 200 |Maximum number of tokens to generate.Not take effect to all LLM api.|
+remember_flag| True |If True, the agent will recode this dialogue as history conversation|
+
+If you want specify your agent for roleplay with a simple sentence, you can run the following code after init the agent object.
+```python
+my_agent.init_messages_by_sentence("You are a cat. From now on, the words you say will have a cat's tone words at the end")
+```
+At most time, you need you agent to deal with more complex tasks,so you will want use a series of dialogue to specify your agent for roleplay, you can run the following code after init the agent object.
+```python
+my_agent.init_messages_by_json('your_dialogue_json_file.json')
+```
+The content of the dialogue json file should have the following format:
+```json
+{
+  "dialogues": [
+    {
+      "role": "user",
+      "content": "Now you are a fearch keywards generation tool based on Ubuntu, and will provide information to the user according to the following rules:\n1. Be able to extract keywords that may be helpful for searching related filenames or directory names based on the user-provided task description and return them in list form.\n2. The keywards can be a part of filename or a path, as long as it can be searched.\n3. If you cannot provide any information, just return the string '[]'.\n4. Ensure that the text you generate starts with the character '[' and ends with the character ']'."
+    },
+    {
+      "role": "assistant",
+      "content": "Okay, I understand."
+    },
+    {
+      "role": "user",
+      "content": "keywards related to the command {enter dir `tool_rsc`} are:"
+    },
+    {
+      "role": "assistant",
+      "content": "['tool_rsc']"
+    },
+    {
+      "role": "user",
+      "content": "keywards related to the command {Open my secret folder} are:"
+    },
+    {
+      "role": "assistant",
+      "content": "[]"
+    },
+    {
+      "role": "user",
+      "content": "keywards related to the command {create a new file `home.json` in my `miniconda3` installation directory} are:"
+    },
+    {
+      "role": "assistant",
+      "content": "['miniconda3']"
+    }
+  ]
+}
+```
+
+

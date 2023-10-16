@@ -6,7 +6,7 @@ from syslogger import logger
 import zhipuai
 import openai
 
-class GptAgent():
+class ChatAgent():
     
     def __init__(self,model_name=llm_name):
         if model_name not in support_llm_dict:
@@ -64,7 +64,7 @@ class GptAgent():
          
 
     # 根据一段文本描述进行角色扮演
-    def init_messages_by_roleplay(self,task):
+    def init_messages_by_sentence(self,task):
         self.messages=None
         self.history_add_one("user",task)
         self.origin_memery = self.messages.copy()
