@@ -1,13 +1,18 @@
 # Taotie
 A tool that integrates a variety of LLM api.
 
-# interface usage guide
-### 1. dependency installation
+
+# Interface usage guide
+## Dependency installation
+---------
 At first we need to install the dependencies.
 ```bash
 pip install -r requirements.txt
 ```
-### init agent object
+</br>
+
+## Init agent object
+-------
 You can init an agent object by using the following code.
 ```python
 from agent_use import ChatAgent
@@ -19,15 +24,18 @@ If you want to use other LLM api, you can set the `llm_name` in file `config.jso
 from agent_use import ChatAgent
 my_agent = ChatAgent(llm_name='chatglm2-6b')
 ```
-Make sure that the the LLM api you want to use is in `support_llm` of `config.json`.
+Make sure that the the LLM api you want to use is in `support_llm` of `config.json`. 
 
-### chat with you agent
+</br>
+
+## Chat with you agent
+-------
 After init the agent object, you can chat with your agent by using the following code.
 ```python
 my_agent.prompt_add('Hello')
 response = my_agent.prompt_post(0.1, 200, False)
 ```
-prompt_post needs 3 parameters: 
+`prompt_post()` supports 3 parameters: 
 
 | Parameter | defaut value | Description |
 | --------- |-----------| ----------- |
@@ -43,7 +51,7 @@ At most time, you need you agent to deal with more complex tasks,so you will wan
 ```python
 my_agent.init_messages_by_json('your_dialogue_json_file.json')
 ```
-The content of the dialogue json file should have the following format:
+The content of the dialogue json file should have the following format, and make sure user and assistant take turns speaking.
 ```json
 {
   "dialogues": [
@@ -82,5 +90,22 @@ The content of the dialogue json file should have the following format:
   ]
 }
 ```
+</br>
 
+## Extra tips
+---------
+- reset agent role 
+  - If you want your agent to reset to the state it just initialized according to the JSON file or text description (which means making the agent forget all dialogs after initialization), you can simply call the `init_role()` function like this.
+    ```python
+    my_agent.init_role()
+    ```
+    If you don't want use `init_role()` so frequently, I highly recommand you use the parameter `remember_flag` of function `prompt_post()` flexibly .
 
+## support LLM interfaces
+support LLM interfaces can be found in `config.json`
+|support LLM interfaces| interface type |
+|:---:|:---:|
+| chatglm2-6b | openai |
+| chatglm_pro | zhipu |
+| chatglm_std | zhipu |
+| chatglm_lite | zhipu |
