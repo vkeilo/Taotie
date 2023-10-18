@@ -15,10 +15,14 @@
         "chatglm_lite":{
             "interface_specification":"zhipu",
             "url":""
+        },
+        "Chinese-Alpaca-2-7B":{
+            "interface_specification":"openai",
+            "url":"http://localhost:19327/v1"
         }
     },
     "local_roles":{
-        "file_keywards_generator":"roles_play/file_keywards_generator_en.json",
+        "file_keywar·ds_generator":"roles_play/file_keywards_generator_en.json",
         "env_var_selector":"roles_play/env_var_selector.json",
         "task_judge":"roles_play/task_judge.json"
     },

@@ -83,10 +83,14 @@ class ChatAgent():
             temperature=T
         )
         # 提取生成的回复文本
-        reply = response.choices[0].message.content
+        default_index = 0
+        if hasattr(response.choices[0], "index"):
+            default_index = -1
+        reply = response.choices[default_index].message.content
         self.history_add_one("assistant", reply)
         if not remember_flag:
             self.messages=self.messages[:-2]
+        logger.info(response)
         return reply
     # zhipuai 接口
     def prompt_post_zhipu(self,T ,maxtokens,remember_flag):
