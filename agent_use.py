@@ -1,7 +1,7 @@
 import threading
 import openai
 import json
-from config_parser import llm_name,support_llm_dict,key
+from config_parser import llm_name,support_llm_dict,keys
 from syslogger import logger
 import zhipuai
 import openai
@@ -21,12 +21,12 @@ class ChatAgent():
     def init_api(self):
         if self.interface_specification == 'openai':
             # import openai
-            openai.api_key = key
+            openai.api_key = keys[self.model]
             if support_llm_dict[self.model]['url'] != "":
                 openai.api_base = support_llm_dict[self.model]['url']
         elif self.interface_specification == 'zhipu':
             # import zhipuai
-            zhipuai.api_key = key
+            zhipuai.api_key = keys[self.model]
         else:
             logger.error(f"model {self.model} not support")
         logger.info(f"api_base:{self.interface_specification}\tllm version: {self.model}")

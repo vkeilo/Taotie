@@ -11,4 +11,6 @@ config = get_config('config.json')
 support_llm_dict = config['support_llm']
 llm_name = config['llm_name']
 local_roles = config['local_roles']
-key = config['key']
+keys = {model_name:model_message["key"] if  "key" in model_message else  ""  for model_name, model_message in support_llm_dict.items()}
+
+

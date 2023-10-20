@@ -2,23 +2,28 @@
     "support_llm":{
         "chatglm2-6b":{
             "interface_specification":"openai",
-            "url":"http://localhost:8000/v1"
+            "url":"http://localhost:8000/v1",
+            "key":""
         },
         "chatglm_pro":{
             "interface_specification":"zhipu",
-            "url":""
+            "url":"",
+            "key":"d818b9db8c2c3c6242d85f4328cf25a8.bgsH0k7BtoWsYd5A"
         },
         "chatglm_std":{
             "interface_specification":"zhipu",
-            "url":""
+            "url":"",
+            "key":""
         },
         "chatglm_lite":{
             "interface_specification":"zhipu",
-            "url":""
+            "url":"",
+            "key":""
         },
         "Chinese-Alpaca-2-7B":{
             "interface_specification":"openai",
-            "url":"http://localhost:19327/v1"
+            "url":"http://localhost:19327/v1",
+            "key":""
         }
     },
     "local_roles":{
@@ -27,8 +32,8 @@
         "task_judge":"roles_play/task_judge.json"
     },
     
-    "llm_name":"chatglm_pro",
-    "key":"d818b9db8c2c3c6242d85f4328cf25a8.bgsH0k7BtoWsYd5A"
+    "llm_name":"chatglm_pro"
+    
 
 
 }
