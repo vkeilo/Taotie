@@ -1,6 +1,14 @@
 # Taotie
 A tool that integrates a variety of LLM api.
 
+## support LLM interfaces
+support LLM interfaces can be found in `config.json`
+|support LLM interfaces| interface type |
+|:---:|:---:|
+| chatglm2-6b | openai |
+| chatglm_pro | zhipu |
+| chatglm_std | zhipu |
+| chatglm_lite | zhipu |
 
 # Interface usage guide
 ## Dependency installation
@@ -19,12 +27,12 @@ from agent_use import ChatAgent
 my_agent = ChatAgent()
 ```
 When class ChatAgent is initialized, it will take the value of `llm_name` in file `config.json` as the default LLM api.  
-If you want to use other LLM api, you can set the `llm_name` in file `config.json` to the name of the LLM api you want to use, or you can just set `llm_name` variable like this:
+If you want to use other LLM-api, you can set the `llm_name` in file `config.json` to the name of the LLM api you want, or you can just set `llm_name` variable like this:
 ```python
 from agent_use import ChatAgent
 my_agent = ChatAgent(llm_name='chatglm2-6b')
 ```
-Make sure that the the LLM api you want to use is in `support_llm` of `config.json`. 
+Make sure that the the LLM api you want to use is surpported by `config.json`. 
 
 </br>
 
@@ -33,7 +41,7 @@ Make sure that the the LLM api you want to use is in `support_llm` of `config.js
 After init the agent object, you can chat with your agent by using the following code.
 ```python
 my_agent.prompt_add('Hello')
-response = my_agent.prompt_post(0.1, 200, False)
+response = my_agent.prompt_post(T=0.1, maxtokens=200, remember_flag=False)
 ```
 `prompt_post()` supports 3 parameters: 
 
@@ -43,11 +51,11 @@ response = my_agent.prompt_post(0.1, 200, False)
 |maxtokens| 200 |Maximum number of tokens to generate.Not take effect to all LLM api.|
 remember_flag| True |If True, the agent will recode this dialogue as history conversation|
 
-If you want specify your agent for roleplay with a simple sentence, you can run the following code after init the agent object.
+If you want specify your agent for roleplay base a simple sentence, you can run the following code after initializing the agent object.
 ```python
 my_agent.init_messages_by_sentence("You are a cat. From now on, the words you say will have a cat's tone words at the end")
 ```
-At most time, you need you agent to deal with more complex tasks,so you will want use a series of dialogue to specify your agent for roleplay, you can run the following code after init the agent object.
+At most time, you may need you agent to deal with more complex tasks, so you will want use a series of dialogue to specify your agent for roleplay, in this case, use `init_messages_by_json()` instead of `init_messages_by_sentence()`.
 ```python
 my_agent.init_messages_by_json('your_dialogue_json_file.json')
 ```
@@ -100,12 +108,3 @@ The content of the dialogue json file should have the following format, and make
     my_agent.init_role()
     ```
     If you don't want use `init_role()` so frequently, I highly recommand you use the parameter `remember_flag` of function `prompt_post()` flexibly .
-
-## support LLM interfaces
-support LLM interfaces can be found in `config.json`
-|support LLM interfaces| interface type |
-|:---:|:---:|
-| chatglm2-6b | openai |
-| chatglm_pro | zhipu |
-| chatglm_std | zhipu |
-| chatglm_lite | zhipu |
