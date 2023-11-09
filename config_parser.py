@@ -3,7 +3,7 @@ import json
 import os
 
 def get_config(file_name):
-    with open(file_name, 'r') as f:
+    with open(file_name, 'r', encoding='utf-8') as f:
         config = json.load(f)
     return config
 

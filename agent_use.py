@@ -39,7 +39,7 @@ class ChatAgent():
 
     # 根据目标json对话中的内容进行角色扮演
     def init_messages_by_json(self,json_path):
-        with open(json_path, 'r') as json_file:
+        with open(json_path, 'r', encoding='utf-8') as json_file:
             data = json.load(json_file)
         self.messages = data["dialogues"]
         self.origin_memery = self.messages.copy()
