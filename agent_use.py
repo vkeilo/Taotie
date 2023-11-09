@@ -1,8 +1,8 @@
 import threading
 import openai
 import json
-from config_parser import llm_name,support_llm_dict,keys
-from syslogger import logger
+from .config_parser import llm_name,support_llm_dict,keys
+from .syslogger import logger
 import zhipuai
 import openai
 

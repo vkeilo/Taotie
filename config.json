@@ -5,6 +5,11 @@
             "url":"http://localhost:8000/v1",
             "key":""
         },
+        "chatglm3-6b":{
+            "interface_specification":"openai",
+            "url":"http://localhost:8000/v1",
+            "key":""
+        },
         "chatglm_pro":{
             "interface_specification":"zhipu",
             "url":"",
