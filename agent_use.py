@@ -65,7 +65,7 @@ class ChatAgent():
 
     # 根据一段文本描述进行角色扮演
     def init_messages_by_sentence(self,task):
-        self.messages=None
+        self.messages=[]
         self.history_add_one("user",task)
         self.origin_memery = self.messages.copy()
 
@@ -90,7 +90,7 @@ class ChatAgent():
         self.history_add_one("assistant", reply)
         if not remember_flag:
             self.messages=self.messages[:-2]
-        logger.info(response)
+        # logger.info(response)
         return reply
     # zhipuai 接口
     def prompt_post_zhipu(self,T ,maxtokens,remember_flag):
