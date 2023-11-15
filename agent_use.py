@@ -103,9 +103,13 @@ class ChatAgent():
         # print((response))
         if response['success'] == False:
             logger.error(response)
+            logger.error(str(self.messages))
+        
         # 提取生成的回复文本
         reply = response['data']['choices'][0]['content']
-
+        self.history_add_one("assistant", reply)
+        if not remember_flag:
+            self.messages=self.messages[:-2]
         return reply[2:-1]
     
     # 接口整合
