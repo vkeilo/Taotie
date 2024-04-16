@@ -30,6 +30,12 @@
             "url":"http://localhost:19327/v1",
             "key":""
         }
+        ,
+        "llama2-fastapi":{
+            "interface_specification":"openai",
+            "url":"http://localhost:5000/",
+            "key":""
+        }
     },
     "local_roles":{
         "file_keywar·ds_generator":"roles_play/file_keywards_generator_en.json",
